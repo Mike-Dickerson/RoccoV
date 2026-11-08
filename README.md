@@ -43,6 +43,14 @@ The interview gathers six things, in this order:
   `gpt-5.6-luna` per the user's request — unverified against Claude's
   training data, so if the model id is wrong the error will now surface
   visibly in the chat instead of failing silently).
+- **Account requirement: an OpenAI API (platform.openai.com) account with
+  access to the `gpt-5.6-luna` model**, plus a funded credit balance
+  (Plans & Billing) — same "two separate billing systems" trap as
+  Anthropic: an OpenAI consumer ChatGPT subscription does **not** cover
+  API usage either. If `gpt-5.6-luna` isn't available on the account, or
+  there's no credit balance, Rocco V now surfaces the API's error
+  directly in the chat (instead of failing silently) — swap the model id
+  in `CHAT_MODEL` (`app/main.py`) if a different one is needed.
 - Before it can be used, the user must authorize Rocco V. Originally
   scoped as an **OAuth login flow** — but neither Anthropic nor OpenAI
   expose a public third-party OAuth client-registration flow for an app
@@ -99,6 +107,9 @@ project changes before this gets built:
   decides when each field is answered well enough to move on.
 
 ## Running it
+
+Requires an OpenAI API account with **`gpt-5.6-luna`** enabled and a
+funded credit balance (see Account requirement above).
 
 ```
 docker compose up -d --build

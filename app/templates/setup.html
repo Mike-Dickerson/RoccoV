@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Rocco V — Setup{% endblock %}
+{% block content %}
+<div class="setup-card">
+  <h1>Connect your OpenAI account</h1>
+  <p>
+    Rocco V uses an OpenAI model to run the interview and write your prompt
+    text. Paste an API key from
+    <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com</a>
+    to authorize it. The key is stored only on this machine, in
+    <code>data/auth.json</code>.
+  </p>
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
+  <form method="post" action="/setup">
+    <input type="password" name="api_key" placeholder="sk-..." required autofocus>
+    <button type="submit">Authorize</button>
+  </form>
+</div>
+{% endblock %}

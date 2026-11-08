@@ -1,0 +1,11 @@
+services:
+  roccov:
+    build: .
+    ports:
+      - "10222:10222"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - ROCCOV_SECRET_KEY=${ROCCOV_SECRET_KEY:-dev-secret-change-me}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+    restart: unless-stopped

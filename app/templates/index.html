@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="app">
+  <header class="topbar">
+    <h1>Rocco V</h1>
+    <p class="tagline">Answer a few questions. Get a prompt you can paste anywhere.</p>
+  </header>
+
+  <div id="chat-log">
+    {% for turn in history %}
+      {% if turn.role == "user" %}
+        <div class="turn user"><strong>You</strong><p>{{ turn.content }}</p></div>
+      {% else %}
+        <div class="turn assistant"><strong>Rocco V</strong><p>{{ turn.content }}</p></div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <form id="chat-form">
+    <textarea id="message" name="message" rows="3" placeholder="Type your answer..." required></textarea>
+    <button type="submit">Send</button>
+  </form>
+
+  <div class="targets">
+    <span>Render for:</span>
+    {% for key, t in targets.items() %}
+      <button type="button" class="target-btn" data-target="{{ key }}">{{ t.label }}</button>
+    {% endfor %}
+  </div>
+
+  <div id="render-box" class="render-box" {% if not last_render %}hidden{% endif %}>
+    <div id="render-target-label" class="render-target-label">{{ last_render.target_label if last_render else "" }}</div>
+    <pre id="render-text">{{ last_render.text if last_render else "" }}</pre>
+    <button type="button" id="copy-btn">Copy</button>
+  </div>
+</div>
+<script src="/static/app.js"></script>
+{% endblock %}
